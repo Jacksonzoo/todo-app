@@ -73,9 +73,7 @@ ul li.checked{
     color:#ff5945;
     text-decoration: line-through;
 }
-ul li.checked::before{
-    
-}
+
 ul li span{
     position: absolute;
     right: 0;
