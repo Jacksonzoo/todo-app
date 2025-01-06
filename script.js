@@ -1,37 +1,41 @@
-const inputBox = document.getElementsByID("input-box");
-const listContainer = document.getElementsById("list-container");
-function addTask(){
-    if(inputBox.value === ''){
-        alert("you must write something!");
-    }
-    else{
+const inputBox = document.getElementById("input-box");
+const listContainer = document.getElementById("list-container");
+
+function addTask() {
+    if (inputBox.value === '') {
+        alert("You must write something!");
+    } else {
         let li = document.createElement("li");
-        li.innterHTML = inputBox.value;
+        li.innerHTML = inputBox.value;
         listContainer.appendChild(li);
+
         let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
+        span.innerHTML = "\u00d7";  // Adds the "×" symbol for task removal
         li.appendChild(span);
     }
-    inputBox.value = "";
-    saveData()
+    inputBox.value = "";  // Clears the input box
+    saveData();
 }
 
-listContainer.addEventListener("click", function(e){
-    if(e.target.tagName === "LI"){
+listContainer.addEventListener("click", function (e) {
+    if (e.target.tagName === "LI") {
         e.target.classList.toggle("checked");
         saveData();
     }
-    else if(e.target.tagName === "SPAN"){
-        e.target.parentElement.remove()
+    else if (e.target.tagName === "SPAN") {
+        e.target.parentElement.remove();
         saveData();
     }
 }, false);
 
-function saveData(){
-    localStorage.setItem("data", listContainer.innerHTML);
+function saveData() {
+    localStorage.setItem("data", listContainer.innerHTML);  // Saves tasks in localStorage
 }
 
-function showTask(){
-    listContainer.innerHTML = localStorage.getItem("data");
+function showTask() {
+    listContainer.innerHTML = localStorage.getItem("data");  // Loads tasks from localStorage
 }
-showTask();
+
+window.onload = function() {
+    showTask();
+};
